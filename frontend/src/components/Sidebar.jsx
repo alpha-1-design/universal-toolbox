@@ -75,7 +75,7 @@ export default function Sidebar() {
           return (
             <button key={cat.id} onClick={() => navigate(`/category/${cat.id}`)}
               className={`nav-link${active ? " active" : ""}`} style={{ gap: 9 }}>
-              <CategoryIcon icon={cat.icon} size={15} color={active ? cat.color : "var(--text3)"} />
+              <CategoryIcon icon={cat.icon} size={15} color={"var(--text3)"} />
               <span style={{ flex: 1, overflow: "hidden", textOverflow: "ellipsis" }}>{cat.name}</span>
               <span style={{ fontSize: 10, color: "var(--text3)", flexShrink: 0 }}>{count}</span>
             </button>

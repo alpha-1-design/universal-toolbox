@@ -1,0 +1,58 @@
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { useApp } from "../context/AppContext";
+
+export default function ToolCard({ tool }) {
+  const navigate = useNavigate();
+  const { toggleBookmark, isBookmarked, openPanel } = useApp();
+  const bm = isBookmarked(tool.id);
+
+  return (
+    <div className="card card-hover" onClick={() => navigate(`/tool/${tool.id}`)}
+      style={{ padding: 16, display: "flex", flexDirection: "column", gap: 11 }}>
+      {/* Header */}
+      <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 8 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 10, minWidth: 0 }}>
+          <div className="tool-avatar" style={{ background: tool.color + "22", color: tool.color, border: `1px solid ${tool.color}30` }}>
+            {tool.name[0]}
+          </div>
+          <div style={{ minWidth: 0 }}>
+            <div style={{ fontWeight: 700, fontSize: 13, color: "var(--text)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{tool.name}</div>
+            <div style={{ fontSize: 11, color: "var(--text3)", marginTop: 1 }}>{tool.category}</div>
+          </div>
+        </div>
+        <button onClick={e => { e.stopPropagation(); toggleBookmark(tool.id); }}
+          style={{ background: "none", border: "none", cursor: "pointer", padding: "3px 4px", color: bm ? "#f0883e" : "var(--text3)", flexShrink: 0, borderRadius: 4, transition: "color 0.15s", fontSize: 14 }}
+          title={bm ? "Remove bookmark" : "Bookmark"}>
+          {bm ? "★" : "☆"}
+        </button>
+      </div>
+
+      {/* Desc */}
+      <p style={{ fontSize: 12, color: "var(--text2)", margin: 0, lineHeight: 1.6,
+        display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>
+        {tool.desc}
+      </p>
+
+      {/* Tags */}
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 4 }}>
+        {tool.tags.slice(0, 2).map(tag => <span key={tag} className="tag">{tag}</span>)}
+        {tool.free ? <span className="tag tag-green">Free</span> : <span className="tag tag-orange">Paid</span>}
+        {tool.featured && <span className="tag tag-blue">⭐ Featured</span>}
+      </div>
+
+      {/* Footer */}
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", paddingTop: 10, borderTop: "1px solid var(--border)", marginTop: "auto" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
+          <span style={{ color: "#d29922", fontSize: 12 }}>★</span>
+          <span style={{ fontSize: 12, fontWeight: 700, color: "var(--text)" }}>{tool.rating}</span>
+          <span style={{ fontSize: 11, color: "var(--text3)" }}>({(tool.reviews / 1000).toFixed(0)}k)</span>
+        </div>
+        <button className="btn btn-secondary" style={{ fontSize: 11, padding: "4px 10px" }}
+          onClick={e => { e.stopPropagation(); openPanel(tool.url, tool.name); }}>
+          Open ↗
+        </button>
+      </div>
+    </div>
+  );
+}

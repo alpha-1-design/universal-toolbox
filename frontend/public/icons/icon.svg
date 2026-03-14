@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="110" fill="#0d1117"/>
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3fb950"/>
+      <stop offset="100%" stop-color="#388bfd"/>
+    </linearGradient>
+  </defs>
+  <!-- Toolbox body -->
+  <rect x="96" y="220" width="320" height="210" rx="18" fill="url(#g)"/>
+  <!-- Handle -->
+  <path d="M192 220 V180 Q192 140 256 140 Q320 140 320 180 V220" fill="none" stroke="url(#g)" stroke-width="28" stroke-linecap="round"/>
+  <!-- Center line -->
+  <rect x="96" y="310" width="320" height="18" rx="9" fill="#0d1117" opacity="0.3"/>
+  <!-- Latch -->
+  <rect x="228" y="295" width="56" height="38" rx="10" fill="#0d1117" opacity="0.4"/>
+</svg>

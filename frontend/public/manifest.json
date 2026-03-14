@@ -1,0 +1,22 @@
+{
+  "name": "Universal Toolbox",
+  "short_name": "Toolbox",
+  "description": "Every tool you'll ever need, in one place. 600+ curated web tools.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0d1117",
+  "theme_color": "#0d1117",
+  "orientation": "any",
+  "scope": "/",
+  "lang": "en",
+  "categories": ["productivity","utilities","developer"],
+  "icons": [
+    { "src": "/icons/icon-192.svg", "sizes": "192x192", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "/icons/icon-512.svg", "sizes": "512x512", "type": "image/svg+xml", "purpose": "any maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Browse All", "url": "/browse" },
+    { "name": "Featured",   "url": "/featured" },
+    { "name": "Bookmarks",  "url": "/bookmarks" }
+  ]
+}

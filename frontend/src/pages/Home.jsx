@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useApp } from "../context/AppContext";
 import ToolCard from "../components/ToolCard";
+import CategoryIcon from "../components/CategoryIcon";
 
 function SectionHeader({ title, sub, action, onAction }) {
   return (

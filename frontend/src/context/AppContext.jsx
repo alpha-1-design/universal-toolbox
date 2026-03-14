@@ -6,9 +6,11 @@ const Ctx = createContext(null);
 export function AppProvider({ children }) {
   // Theme
   const [dark, setDark] = useState(() => {
-    const saved = localStorage.getItem("utb_theme");
-    if (saved) return saved === "dark";
-    return window.matchMedia("(prefers-color-scheme: dark)").matches;
+    try {
+      const saved = localStorage.getItem("utb_theme");
+      if (saved) return saved === "dark";
+      return window.matchMedia("(prefers-color-scheme: dark)").matches;
+    } catch { return true; }
   });
 
   useEffect(() => {

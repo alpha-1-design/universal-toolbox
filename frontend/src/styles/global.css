@@ -213,3 +213,8 @@ select.input { cursor: pointer; }
   from { transform: translateX(-50%) translateY(-10px); opacity: 0; }
   to   { transform: translateX(-50%) translateY(0); opacity: 1; }
 }
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}

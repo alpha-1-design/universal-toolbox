@@ -91,7 +91,7 @@ export default function Home() {
                     }}
                     onMouseEnter={e => { e.currentTarget.style.borderColor = cat.color + "66"; e.currentTarget.style.boxShadow = `0 2px 12px ${cat.color}22`; }}
                     onMouseLeave={e => { e.currentTarget.style.borderColor = "var(--card-border)"; e.currentTarget.style.boxShadow = "none"; }}>
-                    <span style={{ fontSize: 20 }}>{cat.emoji}</span>
+                    <CategoryIcon icon={cat.icon} size={22} color={cat.color} />
                     <div style={{ fontSize: 11, fontWeight: 700, color: "var(--text)", lineHeight: 1.3 }}>{cat.name}</div>
                     <div style={{ fontSize: 10, color: "var(--text3)" }}>{count} tools</div>
                   </button>

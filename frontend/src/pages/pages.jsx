@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import CategoryIcon from '../components/CategoryIcon';
 import { useApp } from "../context/AppContext";
 import ToolCard from "../components/ToolCard";
 
@@ -46,7 +47,7 @@ export function CategoryPage() {
     <PageWrap>
       <button className="btn btn-ghost" style={{ marginBottom: 16, padding: "4px 8px", fontSize: 12 }} onClick={() => navigate(-1)}>← Back</button>
       <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 20 }}>
-        <div style={{ width: 48, height: 48, borderRadius: 12, background: cat.color + "22", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 22 }}>{cat.emoji}</div>
+        <div style={{ width: 48, height: 48, borderRadius: 12, background: cat.color + "22", display: "flex", alignItems: "center", justifyContent: "center" }}><CategoryIcon icon={cat.icon} size={24} color={cat.color} /></div>
         <div>
           <h1 style={{ margin: 0, fontSize: 20, fontWeight: 800, color: "var(--text)" }}>{cat.name}</h1>
           <p style={{ margin: "3px 0 0", fontSize: 12, color: "var(--text3)" }}>{cat.desc}</p>
@@ -104,7 +105,7 @@ export function ToolPage() {
               <div>
                 <h1 style={{ margin: "0 0 4px", fontSize: 20, fontWeight: 800, color: "var(--text)" }}>{tool.name}</h1>
                 <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
-                  {cat && <span className="tag">{cat.emoji} {cat.name}</span>}
+                  {cat && <span className="tag">{cat.name}</span>}
                   {tool.free ? <span className="tag tag-green">Free</span> : <span className="tag tag-orange">Paid</span>}
                   {tool.featured && <span className="tag tag-blue">⭐ Featured</span>}
                 </div>

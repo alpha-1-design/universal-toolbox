@@ -32,23 +32,19 @@
 <body>
   <div id="root"></div>
   <script type="module" src="/src/main.jsx"></script>
+  <!-- Alpha Analytics Tracker -->
+  <script>
+  (function(){
+    var SITE_ID = "5b697972";
+    var API_URL = "https://alpha-analytics-api.onrender.com";
+    if(navigator.doNotTrack==="1")return;
+    function pv(){fetch(API_URL+"/track/pageview",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({site_id:SITE_ID,path:location.pathname,referrer:document.referrer||null}),keepalive:true}).catch(function(){});}
+    function err(e){fetch(API_URL+"/track/error",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({site_id:SITE_ID,message:e.message||"Unknown",path:location.pathname}),keepalive:true}).catch(function(){});}
+    pv();
+    window.addEventListener("error",err);
+    var _ps=history.pushState;history.pushState=function(){_ps.apply(this,arguments);pv();};
+    window.addEventListener("popstate",pv);
+  })();
+  </script>
 </body>
 </html>
-
-<-pkg update Alpha Analytics Tracker -->
-<script>
-(function(){
-  const SITE_ID = "5b697972";
-  const API_URL = "https://alpha-analytics-api.onrender.com"\;
-  if(navigator.doNotTrack==="1")return;
-  const start=Date.now();
-  function pv(){fetch(API_URL+"/track/pageview",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({site_id:SITE_ID,path:location.pathname,referrer:document.referrer||null}),keepalive:true}).catch(()=>{});}
-  function perf(){if(!window.PerformanceObserver)return;const d={site_id:SITE_ID,path:location.pathname};const nav=performance.getEntriesByType("navigation")[0];if(nav)d.ttfb=Math.round(nav.responseStart);setTimeout(()=>fetch(API_URL+"/track/performance",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(d),keepalive:true}).catch(()=>{}),5000);}
-  function err(e){fetch(API_URL+"/track/error",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({site_id:SITE_ID,message:e.message||"Unknown",stack:e.error?.stack||null,path:location.pathname}),keepalive:true}).catch(()=>{});}
-  pv();perf();
-  window.addEventListener("error",err);
-  window.addEventListener("visibilitychange",()=>{if(document.visibilityState==="hidden")navigator.sendBeacon(API_URL+"/track/pageview",JSON.stringify({site_id:SITE_ID,path:location.pathname,referrer:document.referrer||null,duration:Math.round((Date.now()-start)/1000)}));});
-  const _ps=history.pushState;history.pushState=function(){_ps.apply(this,arguments);pv();};
-  window.addEventListener("popstate",pv);
-})();
-</script>

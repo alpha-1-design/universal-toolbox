@@ -1,4 +1,4 @@
-const CACHE = "utb-v3";
+const CACHE = "utb-v4";
 const PRECACHE = ["/", "/manifest.json"];
 
 self.addEventListener("install", e => {

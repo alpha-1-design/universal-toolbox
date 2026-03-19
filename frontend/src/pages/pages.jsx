@@ -173,7 +173,7 @@ export function BrowsePage() {
         <input className="input" placeholder="Search…" value={query} onChange={e => setQuery(e.target.value)} style={{ maxWidth: 220, fontSize: 13 }} />
         <select className="input" style={{ maxWidth: 180, fontSize: 12 }} value={cat} onChange={e => setCat(e.target.value)}>
           <option value="all">All categories</option>
-          {categories.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
+          {categories.map(c => <option key={c.id} value={c.id}>{c.emoji} {c.name}</option>)}
         </select>
         {["all","free","paid","featured"].map(f => (
           <button key={f} className={`btn ${filter === f ? "btn-accent" : "btn-secondary"}`}

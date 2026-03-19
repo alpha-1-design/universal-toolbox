@@ -11,6 +11,13 @@ const BLOCKED_SITES = [
   "atlassian.com", "jira", "dropbox.com", "paypal.com",
   "stripe.com", "amazon.com", "netflix.com", "spotify.com",
   "whatsapp.com", "telegram.org", "reddit.com", "pinterest.com",
+  "microsoft.com", "office.com", "adobe.com", "apple.com",
+  "twitch.tv", "tiktok.com", "snapchat.com", "medium.com",
+  "substack.com", "wordpress.com", "airtable.com", "monday.com",
+  "asana.com", "clickup.com", "hubspot.com", "salesforce.com",
+  "openai.com", "anthropic.com", "vercel.com", "netlify.com",
+  "namecheap.com", "godaddy.com", "cloudflare.com", "heroku.com",
+  "invisionapp.com", "axure.com", "framer.com", "webflow.com",
 ];
 
 function isBlocked(url) {

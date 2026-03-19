@@ -18,7 +18,7 @@ const CSS = `
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&display=swap');
 
 .intro-wrap {
-  position: fixed; top:0; left:0; right:0; bottom:0; width:100vw; height:100vh; z-index: 9999;
+  position: fixed; top:0; left:0; width:100vw; height:100vh; z-index: 99999; transform: translateZ(0);
   background: #000; overflow: hidden;
   font-family: 'Bebas Neue', sans-serif;
   cursor: default; user-select: none;

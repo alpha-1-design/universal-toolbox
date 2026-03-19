@@ -59,10 +59,6 @@ function InstallBanner() {
 
 function Layout() {
   const { sidebarOpen } = useApp();
-  const [introSeen, setIntroSeen] = React.useState(
-    () => localStorage.getItem("utb_intro_seen") === "1"
-  );
-  if (!introSeen) return <IntroScreen onDone={() => setIntroSeen(true)} />;
   return (
     <div style={{ display: "flex", height: "100vh", overflow: "hidden", background: "var(--bg)" }}>
       <div className="desktop-sidebar">
@@ -101,6 +97,10 @@ function Layout() {
 }
 
 export default function App() {
+  const [introSeen, setIntroSeen] = React.useState(
+    () => localStorage.getItem("utb_intro_seen") === "1"
+  );
+  if (!introSeen) return <IntroScreen onDone={() => setIntroSeen(true)} />;
   return (
     <BrowserRouter>
       <AppProvider>

@@ -61,7 +61,7 @@ const FAQS = [
   },
   {
     q: "Can I switch between dark and light mode?",
-    a: "Yes. The app automatically matches your system's theme preference. You can also toggle it manually using the 🌙 / ☀️ button in the top navigation bar. Your preference is saved.",
+    a: "Yes. The app automatically matches your system's theme preference. You can also toggle it manually using the theme button in the top navigation bar. Your preference is saved.",
   },
 ];
 

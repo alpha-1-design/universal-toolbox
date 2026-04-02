@@ -1,30 +1,33 @@
-# 🧰 Universal Toolbox
-### *Every Tool You'll Ever Need — In One Place.*
+# Universal Toolbox
+### Every Tool You'll Ever Need — In One Place.
 
-A beautifully designed, open-source web app and PWA featuring **600+ curated tools** across **50+ categories**. From AI to design, developer utilities to productivity — if it's a great web tool, it's here.
+A beautifully designed, open-source web app and PWA featuring **700+ curated tools** across **50+ categories**. From AI to design, developer utilities to productivity — if it's a great web tool, it's here.
 
 ---
 
-## ✨ Features
+## Features
 
 | Feature | Details |
 |---|---|
-| 🔍 **Search** | Instant search across 600+ tools with Cmd+K shortcut |
-| 🌙 **Dark / Light Mode** | Follows system preference, toggle anytime |
-| 📱 **PWA** | Installs on any device — feels like a real native app |
-| 🔖 **Bookmarks** | Save tools locally, persists between sessions |
-| 📁 **Collections** | Create named folders to group your favourite tools |
-| 🖥️ **Inline Preview** | Open tools in a side panel without leaving the app |
-| 📂 **50+ Categories** | AI, Design, Dev, Productivity, Security, SEO, and more |
-| ♿ **Accessible** | WCAG-compliant colour contrast, keyboard navigable |
-| 🌍 **Any Browser** | Chrome, Firefox, Safari, Edge, Samsung Internet |
-| 📐 **Responsive** | Mobile, tablet, desktop — every screen size |
-| ⚡ **Fast** | Vite build, code-split bundles, service worker caching |
-| 🔒 **Privacy** | All data stays on your device (localStorage only) |
+| **Search** | Instant search across 700+ tools with Cmd+K shortcut |
+| **Dark / Light Mode** | Follows system preference, toggle anytime |
+| **PWA** | Installs on any device — feels like a real native app |
+| **Bookmarks** | Save tools locally, persists between sessions |
+| **Collections** | Create named folders to group your favourite tools |
+| **Inline Preview** | Open tools in a side panel without leaving the app |
+| **50+ Categories** | AI, Design, Dev, Productivity, Security, SEO, and more |
+| **Accessible** | WCAG-compliant colour contrast, keyboard navigable |
+| **Any Browser** | Chrome, Firefox, Safari, Edge, Samsung Internet |
+| **Responsive** | Mobile, tablet, desktop — every screen size |
+| **Fast** | Vite build, code-split bundles, service worker caching |
+| **Privacy** | All data stays on your device (localStorage only) |
+| **Tool of the Day** | Discover something new every visit |
+| **Surprise Me** | Jump to a random tool for spontaneous discovery |
+| **Recently Added** | Keep up with the latest additions |
 
 ---
 
-## 🚀 Quick Start (Termux / Linux)
+## Quick Start (Termux / Linux)
 
 ### Step 1 — Install Node.js
 ```bash
@@ -57,7 +60,7 @@ node server.js
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 universal-toolbox/
@@ -69,19 +72,25 @@ universal-toolbox/
 │   │   └── icons/            ← App icons (all sizes)
 │   └── src/
 │       ├── components/
-│       │   ├── Navbar.jsx    ← Search, theme toggle, nav
+│       │   ├── Navbar.jsx    ← Search, theme toggle, nav, Surprise Me
 │       │   ├── Sidebar.jsx   ← Collapsible category sidebar
 │       │   ├── ToolCard.jsx  ← Individual tool card
-│       │   └── IframePanel.jsx ← Inline tool preview
+│       │   ├── IframePanel.jsx ← Inline tool preview
+│       │   ├── Skeleton.jsx  ← Loading skeleton components
+│       │   └── VersionBanner.jsx ← Welcome back feature
 │       ├── context/
-│       │   └── AppContext.jsx ← Global state (theme, bookmarks, etc.)
+│       │   ├── AppContext.jsx ← Global state (theme, bookmarks, etc.)
+│       │   └── ToastContext.jsx ← Toast notification system
 │       ├── data/
 │       │   ├── categories.js ← 50+ categories
-│       │   ├── tools1–4.js   ← 600+ tools split across files
+│       │   ├── tools1–6.js   ← 700+ tools split across files
 │       │   └── index.js      ← Exports merged tools + categories
 │       ├── pages/
-│       │   ├── Home.jsx      ← Landing page with search + sections
-│       │   └── pages.jsx     ← Browse, Featured, Bookmarks, Category, Tool
+│       │   ├── Home.jsx      ← Landing page with Tool of the Day, Surprise Me
+│       │   ├── pages.jsx     ← Browse, Featured, Bookmarks, Category, Tool
+│       │   ├── AboutPage.jsx ← About the developer
+│       │   ├── FAQPage.jsx   ← Frequently asked questions
+│       │   └── PrivacyPage.jsx ← Privacy policy
 │       ├── styles/
 │       │   └── global.css    ← CSS variables, light/dark, responsive
 │       ├── App.jsx           ← Router, layout, mobile nav, PWA install
@@ -93,9 +102,9 @@ universal-toolbox/
 
 ---
 
-## 🛠️ Adding New Tools
+## Adding New Tools
 
-Edit any of the `frontend/src/data/tools1.js` – `tools4.js` files and add:
+Edit any of the `frontend/src/data/tools1.js` – `tools6.js` files and add:
 
 ```js
 {
@@ -115,13 +124,13 @@ Edit any of the `frontend/src/data/tools1.js` – `tools4.js` files and add:
 
 ---
 
-## 🗂️ Available Category IDs
+## Available Category IDs
 
 `ai` · `design` · `ui-ux` · `dev` · `productivity` · `image` · `video` · `audio` · `writing` · `seo` · `marketing` · `analytics` · `pdf` · `security` · `cloud` · `deploy` · `devops` · `api` · `database` · `testing` · `collab` · `comms` · `pm` · `notes` · `color` · `typography` · `icons` · `photos` · `fonts` · `screenshot` · `learning` · `docs` · `forms` · `qr` · `utils` · `finance` · `scheduling` · `ecommerce` · `cms` · `accessibility` · `maps` · `dataviz` · `resume` · `monitoring` · `translation` · `animation` · `threed` · `social` · `compress` · `version` · `prototyping` · `email` · `stocks` · `3dprint`
 
 ---
 
-## 📈 Expanding to Production
+## Expanding to Production
 
 | Goal | Solution |
 |---|---|
@@ -135,10 +144,10 @@ Edit any of the `frontend/src/data/tools1.js` – `tools4.js` files and add:
 
 ---
 
-## 📜 License
+## License
 
 MIT — Free to use, modify, and distribute.
 
 ---
 
-*Built with React, Vite, Framer Motion, and ❤️*
+*Built with React, Vite, Framer Motion*

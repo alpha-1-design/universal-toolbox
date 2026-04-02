@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { BrowserRouter, Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { AppProvider, useApp } from "./context/AppContext";
+import { ToastProvider } from "./context/ToastContext";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 import IframePanel from "./components/IframePanel";
@@ -66,7 +67,9 @@ function InstallBanner() {
   if (!installPrompt || dismissed) return null;
   return (
     <div className="install-banner">
-      <div style={{ fontSize: 28 }}>🧰</div>
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+      </svg>
       <div style={{ flex: 1 }}>
         <div style={{ fontWeight: 700, color: "var(--text)", fontSize: 13 }}>Install Universal Toolbox</div>
         <div style={{ fontSize: 12, color: "var(--text2)" }}>Add to home screen for the full app experience</div>
@@ -122,7 +125,9 @@ export default function App() {
   return (
     <BrowserRouter>
       <AppProvider>
-        <Layout />
+        <ToastProvider>
+          <Layout />
+        </ToastProvider>
       </AppProvider>
     </BrowserRouter>
   );

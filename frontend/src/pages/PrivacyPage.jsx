@@ -31,8 +31,11 @@ export default function PrivacyPage() {
         background: "var(--green-bg)", border: "1px solid var(--green)", borderRadius: 10,
         padding: "14px 18px", marginBottom: 28,
       }}>
-        <p style={{ margin: 0, fontSize: 13, color: "var(--green)", fontWeight: 600 }}>
-          🛡️ TL;DR — We collect absolutely nothing. No accounts, no tracking, no cookies, no servers receiving your data. Everything stays on your device.
+        <p style={{ margin: 0, fontSize: 13, color: "var(--green)", fontWeight: 600, display: "flex", alignItems: "center", gap: 8 }}>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+          TL;DR — We collect absolutely nothing. No accounts, no tracking, no cookies, no servers receiving your data. Everything stays on your device.
         </p>
       </div>
 

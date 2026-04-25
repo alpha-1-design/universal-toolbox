@@ -5,6 +5,8 @@ import { motion, AnimatePresence } from "framer-motion";
 const CURRENT_VERSION = "2.1";
 const TOTAL_TOOLS = 840;
 const SEVEN_DAYS_MS = 7 * 24 * 60 * 60 * 1000;
+
+const UPDATES = [
   {
     version: "2.1",
     date: "2026-04-24",

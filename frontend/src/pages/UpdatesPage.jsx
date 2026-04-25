@@ -79,7 +79,7 @@ export default function UpdatesPage() {
       {hasNew && (
         <div style={{
           marginBottom: 20, padding: "10px 14px", borderRadius: 8,
-          background: "var(--accent)", background: "rgba(56, 139, 253, 0.12)",
+          background: "rgba(56, 139, 253, 0.12)",
           border: "1px solid rgba(56, 139, 253, 0.3)",
         }}>
           <span style={{ fontSize: 13, fontWeight: 600, color: "var(--accent)" }}>

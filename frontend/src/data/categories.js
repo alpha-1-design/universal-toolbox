@@ -53,4 +53,8 @@ export const categories = [
   { id: "email",       name: "Email Tools",            icon: "mail",        color: "#B22222", desc: "Email templates, deliverability, and inbox tools" },
   { id: "stocks",      name: "Stock Videos & Music",   icon: "film",        color: "#9932CC", desc: "Royalty-free video footage and background music" },
   { id: "3dprint",     name: "3D Printing",            icon: "printer",     color: "#4B0082", desc: "3D model slicers, repositories, and printing tools" },
+  { id: "automation",   name: "Automation",              icon: "zap",         color: "#8B5CF6", desc: "Workflow automation, Zapier alternatives, and productivity boosters" },
+  { id: "nocode",      name: "No-Code Tools",          icon: "box",         color: "#3B82F6", desc: "Build apps and websites without writing code" },
+  { id: "extensions",   name: "Browser Extensions",     icon: "puzzle",     color: "#F59E0B", desc: "Developer and productivity browser extensions" },
+  { id: "templates",   name: "Productivity Templates", icon: "clipboard",   color: "#10B981", desc: "Notion, Airtable, and spreadsheet templates" },
 ];

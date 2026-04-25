@@ -10,6 +10,7 @@ import { BrowsePage, FeaturedPage, BookmarksPage, CategoryPage, ToolPage } from 
 import AboutPage from "./pages/AboutPage";
 import FAQPage from "./pages/FAQPage";
 import PrivacyPage from "./pages/PrivacyPage";
+import UpdatesPage, { UpdatesPopup, TOTAL_TOOLS } from "./pages/UpdatesPage";
 import Footer from "./components/Footer";
 import VersionBanner from "./components/VersionBanner";
 
@@ -82,6 +83,15 @@ function InstallBanner() {
 
 function Layout() {
   const { sidebarOpen } = useApp();
+  const [showPopup, setShowPopup] = React.useState(false);
+
+  React.useEffect(() => {
+    const stored = parseInt(localStorage.getItem("utb_tool_count") || "0");
+    if (stored < TOTAL_TOOLS) {
+      setShowPopup(true);
+    }
+  }, []);
+
   return (
     <div style={{ display: "flex", height: "100vh", overflow: "hidden", background: "var(--bg)" }}>
       <div className="desktop-sidebar">
@@ -103,6 +113,7 @@ function Layout() {
             <Route path="/browse"      element={<BrowsePage />} />
             <Route path="/featured"    element={<FeaturedPage />} />
             <Route path="/bookmarks"   element={<BookmarksPage />} />
+            <Route path="/whats-new"  element={<UpdatesPage />} />
             <Route path="/category/:id" element={<CategoryPage />} />
             <Route path="/tool/:id"    element={<ToolPage />} />
             <Route path="/about"       element={<AboutPage />} />
@@ -117,6 +128,7 @@ function Layout() {
       <IframePanel />
       <MobileNav />
       <InstallBanner />
+      {showPopup && <UpdatesPopup onClose={() => setShowPopup(false)} />}
     </div>
   );
 }

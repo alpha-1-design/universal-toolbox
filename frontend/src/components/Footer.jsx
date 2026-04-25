@@ -30,6 +30,7 @@ export default function Footer() {
         </div>
         <div style={{ display: "flex", gap: 4, flexWrap: "wrap" }}>
           {[
+            { label: "Updates", path: "/whats-new" },
             { label: "About",   path: "/about" },
             { label: "FAQ",     path: "/faq" },
             { label: "Privacy", path: "/privacy" },

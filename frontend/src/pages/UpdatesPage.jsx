@@ -50,9 +50,6 @@ const UPDATES = [
   },
 ];
 
-const CURRENT_VERSION = "2.1";
-const SEVEN_DAYS_MS = 7 * 24 * 60 * 60 * 1000;
-
 export default function UpdatesPage() {
   const navigate = useNavigate();
   const [hasNew, setHasNew] = useState(false);

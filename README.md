@@ -1,153 +1,86 @@
-# Universal Toolbox
-### Every Tool You'll Ever Need — In One Place.
+# Universal Toolbox 🛠️
 
-A beautifully designed, open-source web app and PWA featuring **700+ curated tools** across **50+ categories**. From AI to design, developer utilities to productivity — if it's a great web tool, it's here.
+<div align="center">
 
----
+![Universal Toolbox Hero](assets/hero.jpg)
 
-## Features
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![React](https://img.shields.io/badge/React-18.3-61DAFB.svg)](https://reactjs.org/)
+[![Vite](https://img.shields.io/badge/Vite-6.0-646CFF.svg)](https://vitejs.dev/)
+[![PWA](https://img.shields.io/badge/PWA-Ready-blue.svg)](https://web.dev/progressive-web-apps/)
+[![Live Demo](https://img.shields.io/badge/Live-Demo-emerald.svg)](https://universal-toolbox.vercel.app/)
 
-| Feature | Details |
-|---|---|
-| **Search** | Instant search across 700+ tools with Cmd+K shortcut |
-| **Dark / Light Mode** | Follows system preference, toggle anytime |
-| **PWA** | Installs on any device — feels like a real native app |
-| **Bookmarks** | Save tools locally, persists between sessions |
-| **Collections** | Create named folders to group your favourite tools |
-| **Inline Preview** | Open tools in a side panel without leaving the app |
-| **50+ Categories** | AI, Design, Dev, Productivity, Security, SEO, and more |
-| **Accessible** | WCAG-compliant colour contrast, keyboard navigable |
-| **Any Browser** | Chrome, Firefox, Safari, Edge, Samsung Internet |
-| **Responsive** | Mobile, tablet, desktop — every screen size |
-| **Fast** | Vite build, code-split bundles, service worker caching |
-| **Privacy** | All data stays on your device (localStorage only) |
-| **Tool of the Day** | Discover something new every visit |
-| **Surprise Me** | Jump to a random tool for spontaneous discovery |
-| **Recently Added** | Keep up with the latest additions |
+**Universal Toolbox** is a comprehensive, beautifully designed open-source workspace featuring **700+ curated tools** across **50+ categories**. It is built as a high-performance Progressive Web App (PWA) to ensure your essential tools are always just one click away.
+
+[Live Demo](https://universal-toolbox.vercel.app/) · [Report Bug](https://github.com/alpha-1-design/universal-toolbox/issues) · [Contributing](./CONTRIBUTING.md)
+
+</div>
 
 ---
 
-## Quick Start (Termux / Linux)
+## 🚀 Tech Stack
 
-### Step 1 — Install Node.js
-```bash
-pkg update && pkg install nodejs
-```
+| Category | Technologies |
+| :--- | :--- |
+| **Frontend** | ![React](https://img.shields.io/badge/React-20232A?style=flat&logo=react&logoColor=61DAFB) ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black) ![Framer Motion](https://img.shields.io/badge/Framer_Motion-0055FF?style=flat&logo=framer&logoColor=white) |
+| **State & Logic** | ![Zustand](https://img.shields.io/badge/Zustand-443E38?style=flat) ![Context API](https://img.shields.io/badge/React_Context-61DAFB?style=flat) |
+| **Performance** | ![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat&logo=vite&logoColor=white) ![Service Workers](https://img.shields.io/badge/PWA-Enabled-orange?style=flat) |
+| **Backend** | ![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat&logo=nodedotjs&logoColor=white) ![Express](https://img.shields.io/badge/Express-000000?style=flat&logo=express&logoColor=white) |
 
-### Step 2 — Unzip and enter the project
+---
+
+## ✨ Key Features
+
+*   **700+ Curated Tools:** A massive collection covering AI, Design, Development, SEO, and Productivity.
+*   **Instant Search:** Global `Cmd+K` shortcut for lightning-fast discovery.
+*   **Progressive Web App:** Install natively on Android, iOS, or Desktop for offline-ready access.
+*   **Personalization:** Dark/Light mode support, local bookmarks, and custom tool collections.
+*   **Inline Previews:** Side-panel iframe previews allow you to use tools without losing your place.
+*   **Privacy Centric:** All bookmarks and settings stay on your device via `localStorage`.
+
+<div align="center">
+  <img src="assets/screenshot1.jpg" width="45%" />
+  <img src="assets/screenshot2.jpg" width="45%" />
+</div>
+
+---
+
+## 🛠️ Installation & Development
+
+### Quick Start (Local Development)
 ```bash
-cp /sdcard/Download/universal-toolbox.zip ~/
-unzip universal-toolbox.zip
+# Clone the repository
+git clone https://github.com/alpha-1-design/universal-toolbox.git
 cd universal-toolbox
-```
 
-### Step 3 — Start the Frontend
-```bash
+# Setup Frontend
 cd frontend
 npm install
 npm run dev
 ```
-Open **http://localhost:5173** in your browser.
+Visit `http://localhost:5173`.
 
-### Step 4 — (Optional) Start the Backend API
+### Backend Setup (Optional)
 ```bash
-# New Termux session (swipe right → New Session)
-cd ~/universal-toolbox/backend
+cd backend
 npm install
 node server.js
-# Runs on http://localhost:3001
 ```
+Runs on `http://localhost:3001`.
 
 ---
 
-## Project Structure
+## 📦 Project Structure
 
-```
-universal-toolbox/
-├── frontend/
-│   ├── public/
-│   │   ├── manifest.json     ← PWA manifest
-│   │   ├── sw.js             ← Service worker (offline support)
-│   │   ├── robots.txt
-│   │   └── icons/            ← App icons (all sizes)
-│   └── src/
-│       ├── components/
-│       │   ├── Navbar.jsx    ← Search, theme toggle, nav, Surprise Me
-│       │   ├── Sidebar.jsx   ← Collapsible category sidebar
-│       │   ├── ToolCard.jsx  ← Individual tool card
-│       │   ├── IframePanel.jsx ← Inline tool preview
-│       │   ├── Skeleton.jsx  ← Loading skeleton components
-│       │   └── VersionBanner.jsx ← Welcome back feature
-│       ├── context/
-│       │   ├── AppContext.jsx ← Global state (theme, bookmarks, etc.)
-│       │   └── ToastContext.jsx ← Toast notification system
-│       ├── data/
-│       │   ├── categories.js ← 50+ categories
-│       │   ├── tools1–6.js   ← 700+ tools split across files
-│       │   └── index.js      ← Exports merged tools + categories
-│       ├── pages/
-│       │   ├── Home.jsx      ← Landing page with Tool of the Day, Surprise Me
-│       │   ├── pages.jsx     ← Browse, Featured, Bookmarks, Category, Tool
-│       │   ├── AboutPage.jsx ← About the developer
-│       │   ├── FAQPage.jsx   ← Frequently asked questions
-│       │   └── PrivacyPage.jsx ← Privacy policy
-│       ├── styles/
-│       │   └── global.css    ← CSS variables, light/dark, responsive
-│       ├── App.jsx           ← Router, layout, mobile nav, PWA install
-│       └── main.jsx          ← Entry point, SW registration
-├── backend/
-│   └── server.js             ← Express API (extendable)
-└── README.md
-```
+*   `frontend/src/components`: UI components including the Sidebar, ToolCards, and Iframe panels.
+*   `frontend/src/data`: The core engine containing the 700+ tool definitions and 50+ categories.
+*   `frontend/src/context`: Global state management for theme, bookmarks, and notifications.
+*   `backend/`: Express API for extended functionality and data synchronization.
 
 ---
 
-## Adding New Tools
+## 📜 Contributing & Community
 
-Edit any of the `frontend/src/data/tools1.js` – `tools6.js` files and add:
+We welcome contributions! Whether you're adding new tools or improving the UI, please check out our [Contributing Guide](./CONTRIBUTING.md).
 
-```js
-{
-  id: 607,                          // Unique, increment from last
-  name: "Tool Name",
-  url: "https://example.com",
-  category: "dev",                  // Must match a category id
-  tags: ["tag1", "tag2", "tag3"],
-  color: "#FF5500",                 // Brand color for the avatar
-  free: true,
-  rating: 4.5,
-  reviews: 5000,
-  featured: false,
-  desc: "Short description of what this tool does."
-}
-```
-
----
-
-## Available Category IDs
-
-`ai` · `design` · `ui-ux` · `dev` · `productivity` · `image` · `video` · `audio` · `writing` · `seo` · `marketing` · `analytics` · `pdf` · `security` · `cloud` · `deploy` · `devops` · `api` · `database` · `testing` · `collab` · `comms` · `pm` · `notes` · `color` · `typography` · `icons` · `photos` · `fonts` · `screenshot` · `learning` · `docs` · `forms` · `qr` · `utils` · `finance` · `scheduling` · `ecommerce` · `cms` · `accessibility` · `maps` · `dataviz` · `resume` · `monitoring` · `translation` · `animation` · `threed` · `social` · `compress` · `version` · `prototyping` · `email` · `stocks` · `3dprint`
-
----
-
-## Expanding to Production
-
-| Goal | Solution |
-|---|---|
-| Real database | Replace `src/data/` with Supabase / Postgres |
-| User accounts | Add Supabase Auth |
-| Tool submissions | Add a form + admin review queue |
-| Search engine | Integrate Algolia or MeiliSearch |
-| Deploy frontend | Vercel / Netlify (free) |
-| Deploy backend | Railway / Render (free tier) |
-| Analytics | Plausible or Umami (privacy-first) |
-
----
-
-## License
-
-MIT — Free to use, modify, and distribute.
-
----
-
-*Built with React, Vite, Framer Motion*
+Distributed under the **MIT License**. Built for the Alpha-1 Ecosystem.

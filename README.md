@@ -2,8 +2,6 @@
 
 <div align="center">
 
-![Universal Toolbox Hero](assets/hero.jpg)
-
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![React](https://img.shields.io/badge/React-18.3-61DAFB.svg)](https://reactjs.org/)
 [![Vite](https://img.shields.io/badge/Vite-6.0-646CFF.svg)](https://vitejs.dev/)
@@ -13,6 +11,11 @@
 **Universal Toolbox** is a comprehensive, beautifully designed open-source workspace featuring **700+ curated tools** across **50+ categories**. It is built as a high-performance Progressive Web App (PWA) to ensure your essential tools are always just one click away.
 
 [Live Demo](https://universal-toolbox.vercel.app/) · [Report Bug](https://github.com/alpha-1-design/universal-toolbox/issues) · [Contributing](./CONTRIBUTING.md)
+
+<div align="center">
+  <img src="assets/screenshot1.jpg" width="45%" />
+  <img src="assets/screenshot2.jpg" width="45%" />
+</div>
 
 </div>
 
@@ -84,3 +87,7 @@ Runs on `http://localhost:3001`.
 We welcome contributions! Whether you're adding new tools or improving the UI, please check out our [Contributing Guide](./CONTRIBUTING.md).
 
 Distributed under the **MIT License**. Built for the Alpha-1 Ecosystem.
+
+<div align="center">
+  <img src="assets/hero.jpg" width="90%" />
+</div>

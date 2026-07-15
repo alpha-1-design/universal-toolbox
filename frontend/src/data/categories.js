@@ -57,4 +57,5 @@ export const categories = [
   { id: "nocode",      name: "No-Code Tools",          icon: "box",         color: "#3B82F6", desc: "Build apps and websites without writing code" },
   { id: "extensions",   name: "Browser Extensions",     icon: "puzzle",     color: "#F59E0B", desc: "Developer and productivity browser extensions" },
   { id: "templates",   name: "Productivity Templates", icon: "clipboard",   color: "#10B981", desc: "Notion, Airtable, and spreadsheet templates" },
+  { id: "alpha-1-design", name: "By Alpha-1 Design",     icon: "github",      color: "#10B981", desc: "Projects, tools, and experiments crafted by Alpha-1 Design", featured: true },
 ];

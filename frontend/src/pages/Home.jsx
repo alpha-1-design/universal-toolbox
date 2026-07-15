@@ -117,6 +117,9 @@ export default function Home() {
 
   const featured = useMemo(() => tools.filter(t => t.featured), [tools]);
 
+  const creatorCat = categories.find(c => c.id === "alpha-1-design");
+  const creatorTools = useMemo(() => tools.filter(t => t.category === "alpha-1-design"), [tools]);
+
   const searched = useMemo(() => filterTools(tools, query), [query, tools]);
 
   const fuzzy = useMemo(() => createFuzzySearch(tools), [tools]);
@@ -202,20 +205,62 @@ export default function Home() {
         )}
 
         {!query && <>
+          {/* By Alpha-1 Design — creator showcase */}
+          {creatorCat && (
+            <section style={{ marginBottom: 44 }}>
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3 }}
+                style={{
+                  position: "relative", borderRadius: 16, padding: "22px 22px 18px", marginBottom: 18, overflow: "hidden",
+                  background: "linear-gradient(120deg,#064e3b,#065f46 38%,#047857 68%,#0d9488)",
+                  border: "1px solid rgba(16,185,129,0.35)",
+                }}
+              >
+                <div style={{ position: "absolute", inset: 0, background: "radial-gradient(620px 220px at 88% -30%, rgba(52,211,153,0.40), transparent 70%)" }} />
+                <div style={{ position: "relative", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, flexWrap: "wrap" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 13 }}>
+                    <div style={{ width: 46, height: 46, borderRadius: 12, background: "rgba(255,255,255,0.15)", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", flexShrink: 0 }}>
+                      <CategoryIcon icon="github" size={25} color="#fff" />
+                    </div>
+                    <div>
+                      <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                        <h2 style={{ margin: 0, fontSize: 18, fontWeight: 800, color: "#fff", letterSpacing: "-0.01em" }}>By Alpha-1 Design</h2>
+                        <span style={{ fontSize: 9, fontWeight: 800, letterSpacing: "0.06em", textTransform: "uppercase", color: "#064e3b", background: "#6ee7b7", padding: "2px 7px", borderRadius: 20 }}>Featured</span>
+                      </div>
+                      <p style={{ margin: "3px 0 0", fontSize: 12, color: "rgba(255,255,255,0.82)" }}>
+                        Projects, tools & experiments crafted by Alpha-1 Design · {creatorTools.length} repositories
+                      </p>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => navigate(`/category/${creatorCat.id}`)}
+                    style={{ fontSize: 12, padding: "9px 15px", background: "rgba(255,255,255,0.16)", color: "#fff", border: "1px solid rgba(255,255,255,0.28)", borderRadius: 9, cursor: "pointer", fontFamily: "inherit", fontWeight: 600, flexShrink: 0 }}
+                  >
+                    View all →
+                  </button>
+                </div>
+              </motion.div>
+              <div className="tool-grid">{creatorTools.map(t => <ToolCard key={t.id} tool={t} />)}</div>
+            </section>
+          )}
+
           {/* Category pills */}
           <section style={{ marginBottom: 36 }}>
             <SectionHeader title="Browse by Category" sub={`${categories.length} categories`} action="See all" onAction={() => navigate("/browse")} />
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(120px, 1fr))", gap: 8 }}>
-              {categories.map(cat => {
+              {[...categories].sort((a, b) => (a.id === "alpha-1-design" ? -1 : b.id === "alpha-1-design" ? 1 : 0)).map(cat => {
                 const count = tools.filter(t => t.category === cat.id).length;
                 return (
                   <motion.button
                     key={cat.id}
                     onClick={() => navigate(`/category/${cat.id}`)}
                     style={{
-                      background: "var(--card)", border: "1px solid var(--card-border)", borderRadius: 10,
+                      background: "var(--card)", border: "1px solid " + (cat.id === "alpha-1-design" ? cat.color + "66" : "var(--card-border)"), borderRadius: 10,
                       padding: "12px 10px", cursor: "pointer", textAlign: "left",
                       display: "flex", flexDirection: "column", gap: 5,
+                      ...(cat.id === "alpha-1-design" ? { boxShadow: `0 4px 16px ${cat.color}22` } : {}),
                     }}
                     whileHover={{ y: -2, borderColor: cat.color + "66", boxShadow: `0 4px 12px ${cat.color}15` }}
                     transition={{ duration: 0.15 }}

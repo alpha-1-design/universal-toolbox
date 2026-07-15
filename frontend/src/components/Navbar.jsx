@@ -1,28 +1,37 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useApp } from "../context/AppContext";
+import { createFuzzySearch } from "../lib/search";
+
+const RECENT_KEY = "utb_recent";
 
 export default function Navbar() {
   const navigate = useNavigate();
   const { setSidebarOpen, sidebarOpen, tools, dark, setDark } = useApp();
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
+  const [recent, setRecent] = useState(() => {
+    try { return JSON.parse(localStorage.getItem(RECENT_KEY) || "[]"); } catch { return []; }
+  });
   const [open, setOpen] = useState(false);
   const inputRef = useRef(null);
   const wrapRef = useRef(null);
 
+  const search = useMemo(() => createFuzzySearch(tools), [tools]);
+
   useEffect(() => {
-    const q = query.trim().toLowerCase();
+    const q = query.trim();
     if (!q) { setResults([]); return; }
-    setResults(
-      tools.filter(t =>
-        t.name.toLowerCase().includes(q) ||
-        t.desc.toLowerCase().includes(q) ||
-        t.tags.some(tag => tag.includes(q)) ||
-        t.category.toLowerCase().includes(q)
-      ).slice(0, 8)
-    );
-  }, [query, tools]);
+    setResults(search(q, 8));
+  }, [query, search]);
+
+  const pushRecent = (id) => {
+    setRecent((prev) => {
+      const next = [id, ...prev.filter((x) => x !== id)].slice(0, 6);
+      try { localStorage.setItem(RECENT_KEY, JSON.stringify(next)); } catch {}
+      return next;
+    });
+  };
 
   useEffect(() => {
     const h = e => {
@@ -39,7 +48,14 @@ export default function Navbar() {
     return () => document.removeEventListener("mousedown", h);
   }, []);
 
-  const select = tool => { setQuery(""); setResults([]); setOpen(false); navigate(`/tool/${tool.id}`); };
+  const select = tool => {
+    pushRecent(tool.id);
+    setQuery(""); setResults([]); setOpen(false); navigate(`/tool/${tool.id}`);
+  };
+
+  const recentTools = recent
+    .map((id) => tools.find((t) => t.id === id))
+    .filter(Boolean);
 
   return (
     <header style={{
@@ -83,12 +99,38 @@ export default function Navbar() {
           )}
         </div>
 
-        {open && results.length > 0 && (
+        {open && (results.length > 0 || (!query.trim() && recentTools.length > 0)) && (
           <div style={{
             position: "absolute", top: "calc(100% + 6px)", left: 0, right: 0,
             background: "var(--card)", border: "1px solid var(--border)", borderRadius: 10,
             overflow: "hidden", boxShadow: "var(--shadow-lg)", zIndex: 999,
           }}>
+            {!query.trim() && recentTools.length > 0 && (
+              <>
+                <div style={{ padding: "8px 14px 4px", fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.05em", color: "var(--text3)" }}>
+                  Recent
+                </div>
+                {recentTools.map((tool) => (
+                  <div key={tool.id} onMouseDown={() => select(tool)}
+                    style={{
+                      display: "flex", alignItems: "center", gap: 10, padding: "9px 14px",
+                      cursor: "pointer", borderBottom: "1px solid var(--border)", transition: "background 0.1s",
+                    }}
+                    onMouseEnter={e => e.currentTarget.style.background = "var(--bg3)"}
+                    onMouseLeave={e => e.currentTarget.style.background = "transparent"}
+                  >
+                    <div className="tool-avatar" style={{ width: 30, height: 30, fontSize: 11, background: tool.color + "22", color: tool.color, borderRadius: 6 }}>
+                      {tool.name[0]}
+                    </div>
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <div style={{ fontSize: 13, fontWeight: 600, color: "var(--text)" }}>{tool.name}</div>
+                      <div style={{ fontSize: 11, color: "var(--text3)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{tool.desc}</div>
+                    </div>
+                  </div>
+                ))}
+                <div style={{ height: 1, background: "var(--border)" }} />
+              </>
+            )}
             {results.map((tool, i) => (
               <div key={tool.id} onMouseDown={() => select(tool)}
                 style={{

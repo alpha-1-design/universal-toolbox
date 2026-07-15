@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { tools as allTools, categories } from "../data";
+import { toggleInList } from "../lib/bookmarks";
 
 const Ctx = createContext(null);
 
@@ -51,7 +52,7 @@ export function AppProvider({ children }) {
     setInstallPrompt(null);
   };
 
-  const toggleBookmark = id => setBookmarks(p => p.includes(id) ? p.filter(x => x !== id) : [...p, id]);
+  const toggleBookmark = id => setBookmarks(p => toggleInList(p, id));
   const isBookmarked = id => bookmarks.includes(id);
   const getBookmarked = () => allTools.filter(t => bookmarks.includes(t.id));
 
@@ -72,8 +73,8 @@ export function AppProvider({ children }) {
   return (
     <Ctx.Provider value={{
       tools: allTools, categories, dark, setDark,
-      bookmarks, toggleBookmark, isBookmarked, getBookmarked,
-      collections, addCollection, removeCollection, addToCollection,
+      bookmarks, setBookmarks, toggleBookmark, isBookmarked, getBookmarked,
+      collections, setCollections, addCollection, removeCollection, addToCollection,
       panelUrl, panelName, openPanel, closePanel,
       sidebarOpen, setSidebarOpen,
       installPrompt, install,

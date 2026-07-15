@@ -2,6 +2,7 @@ import React, { useState, useMemo, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { useApp } from "../context/AppContext";
+import { filterTools, createFuzzySearch } from "../lib/search";
 import ToolCard from "../components/ToolCard";
 import CategoryIcon from "../components/CategoryIcon";
 
@@ -116,14 +117,13 @@ export default function Home() {
 
   const featured = useMemo(() => tools.filter(t => t.featured), [tools]);
 
-  const searched = useMemo(() => {
-    if (!query.trim()) return [];
-    const q = query.toLowerCase();
-    return tools.filter(t =>
-      t.name.toLowerCase().includes(q) || t.desc.toLowerCase().includes(q) ||
-      t.tags.some(tag => tag.includes(q)) || t.category.toLowerCase().includes(q)
-    );
-  }, [query, tools]);
+  const searched = useMemo(() => filterTools(tools, query), [query, tools]);
+
+  const fuzzy = useMemo(() => createFuzzySearch(tools), [tools]);
+  const suggestions = useMemo(
+    () => (query.trim() && searched.length === 0 ? fuzzy(query, 6) : []),
+    [query, searched.length, fuzzy, tools]
+  );
 
   const handleRandom = () => {
     const random = tools[Math.floor(Math.random() * tools.length)];
@@ -180,7 +180,7 @@ export default function Home() {
         </AnimatePresence>
 
         {/* Search Results */}
-        {query && (
+          {query && (
           <section style={{ marginBottom: 40 }}>
             <SectionHeader title={`"${query}"`} sub={`${searched.length} tools found`} />
             {searched.length === 0
@@ -188,7 +188,13 @@ export default function Home() {
                   <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" style={{ margin: "0 auto 12px", opacity: 0.4 }}>
                     <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
                   </svg>
-                  No tools found for "{query}"
+                  No exact matches for "{query}".
+                  {suggestions.length > 0 && (
+                    <>
+                      <div style={{ marginTop: 20, fontSize: 13, fontWeight: 700, color: "var(--text)", marginBottom: 12 }}>Did you mean?</div>
+                      <div className="tool-grid" style={{ textAlign: "left" }}>{suggestions.map(t => <ToolCard key={t.id} tool={t} />)}</div>
+                    </>
+                  )}
                 </div>
               : <div className="tool-grid">{searched.map(t => <ToolCard key={t.id} tool={t} />)}</div>
             }

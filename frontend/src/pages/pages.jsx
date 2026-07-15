@@ -1,8 +1,9 @@
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo, useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import CategoryIcon from '../components/CategoryIcon';
 import { useApp } from "../context/AppContext";
+import { mergeBookmarks } from "../lib/bookmarks";
 import ToolCard from "../components/ToolCard";
 import { SkeletonGrid } from "../components/Skeleton";
 
@@ -256,11 +257,65 @@ export function FeaturedPage() {
 // ── Bookmarks Page ────────────────────────────────────────────────────────
 export function BookmarksPage() {
   const navigate = useNavigate();
-  const { getBookmarked, collections, tools } = useApp();
+  const { getBookmarked, collections, tools, bookmarks, setBookmarks, setCollections } = useApp();
   const saved = getBookmarked();
+  const fileRef = useRef(null);
+
+  const handleExport = () => {
+    const payload = { version: 1, bookmarks, collections };
+    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "universal-toolbox-bookmarks.json";
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const handleImport = (e) => {
+    const file = e.target.files?.[0];
+    e.target.value = "";
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      try {
+        const data = JSON.parse(reader.result);
+        if (Array.isArray(data.bookmarks)) setBookmarks(mergeBookmarks(bookmarks, data.bookmarks));
+        if (Array.isArray(data.collections)) {
+          const existing = new Set(collections.map((c) => c.id));
+          const merged = [...collections];
+          for (const c of data.collections) {
+            if (c && c.id != null && !existing.has(c.id)) merged.push(c);
+          }
+          setCollections(merged);
+        }
+      } catch {
+        alert("Could not import: invalid backup file.");
+      }
+    };
+    reader.readAsText(file);
+  };
+
   return (
     <PageWrap>
-      <H1 sub={`${saved.length} saved tools`}>Bookmarks</H1>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, flexWrap: "wrap", marginBottom: 20 }}>
+        <H1 sub={`${saved.length} saved tools`}>Bookmarks</H1>
+        <div style={{ display: "flex", gap: 8 }}>
+          <button className="btn btn-secondary" style={{ fontSize: 12 }} onClick={handleExport} disabled={saved.length === 0 && collections.length === 0}>
+            <span style={{ display: "flex", alignItems: "center", gap: 5 }}>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Export
+            </span>
+          </button>
+          <button className="btn btn-secondary" style={{ fontSize: 12 }} onClick={() => fileRef.current?.click()}>
+            <span style={{ display: "flex", alignItems: "center", gap: 5 }}>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              Import
+            </span>
+          </button>
+          <input ref={fileRef} type="file" accept="application/json" hidden onChange={handleImport} />
+        </div>
+      </div>
       {saved.length === 0
         ? <div className="card" style={{ padding: "48px 24px", textAlign: "center" }}>
             <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" style={{ margin: "0 auto 12px", opacity: 0.4, color: "var(--text3)" }}>

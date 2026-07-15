@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect, useRef } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import CategoryIcon from '../components/CategoryIcon';
 import { useApp } from "../context/AppContext";
@@ -62,6 +62,12 @@ export function CategoryPage() {
           <p style={{ margin: "3px 0 0", fontSize: 12, color: "var(--text3)" }}>{cat.desc}</p>
         </div>
       </div>
+      {cat.id === "power-tools" && (
+        <div className="card" style={{ padding: "12px 16px", marginBottom: 20, display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, flexWrap: "wrap", borderColor: "var(--green)", background: "var(--green-bg)" }}>
+          <div style={{ fontSize: 13, color: "var(--text2)" }}>In-depth guides on each open-source power tool and the paid software it replaces.</div>
+          <Link to="/blogs" className="btn btn-primary" style={{ fontSize: 12 }}>Read the deep-dives →</Link>
+        </div>
+      )}
       <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 20 }}>
         <input className="input" placeholder="Filter…" value={query} onChange={e => setQuery(e.target.value)} style={{ maxWidth: 220, fontSize: 13 }} />
         {["all","free","paid","featured"].map(f => (

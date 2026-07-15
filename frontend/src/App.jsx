@@ -7,6 +7,7 @@ import Sidebar from "./components/Sidebar";
 import IframePanel from "./components/IframePanel";
 import Home from "./pages/Home";
 import { BrowsePage, FeaturedPage, BookmarksPage, CategoryPage, ToolPage } from "./pages/pages";
+import { BlogsPage, BlogPostPage } from "./pages/BlogPages";
 import AboutPage from "./pages/AboutPage";
 import FAQPage from "./pages/FAQPage";
 import PrivacyPage from "./pages/PrivacyPage";
@@ -116,6 +117,8 @@ function Layout() {
             <Route path="/whats-new"  element={<UpdatesPage />} />
             <Route path="/category/:id" element={<CategoryPage />} />
             <Route path="/tool/:id"    element={<ToolPage />} />
+            <Route path="/blogs"       element={<BlogsPage />} />
+            <Route path="/blog/:slug"  element={<BlogPostPage />} />
             <Route path="/about"       element={<AboutPage />} />
             <Route path="/faq"         element={<FAQPage />} />
             <Route path="/privacy"     element={<PrivacyPage />} />

@@ -8,7 +8,7 @@
 [![PWA](https://img.shields.io/badge/PWA-Ready-blue.svg)](https://web.dev/progressive-web-apps/)
 [![Live Demo](https://img.shields.io/badge/Live-Demo-emerald.svg)](https://universal-toolbox.vercel.app/)
 
-**Universal Toolbox** is a comprehensive, beautifully designed open-source workspace featuring **700+ curated tools** across **50+ categories**. It is built as a high-performance Progressive Web App (PWA) to ensure your essential tools are always just one click away.
+**Universal Toolbox** is a comprehensive, beautifully designed open-source workspace featuring **700+ curated tools** across **50+ categories**, including a growing **Open Source Power Tools** collection with deep-dive blogs that showcase free alternatives to expensive proprietary software. It is built as a high-performance Progressive Web App (PWA) to ensure your essential tools are always just one click away.
 
 [Live Demo](https://universal-toolbox.vercel.app/) · [Report Bug](https://github.com/alpha-1-design/universal-toolbox/issues) · [Contributing](./CONTRIBUTING.md)
 
@@ -35,6 +35,8 @@
 ## ✨ Key Features
 
 *   **700+ Curated Tools:** A massive collection covering AI, Design, Development, SEO, and Productivity.
+*   **Open Source Power Tools:** A dedicated category of free, open-source alternatives (Blender, GIMP, OBS, LibreOffice, Immich, Jellyfin, VS Code, Ollama, Bitwarden, and more) that replace paid software.
+*   **Per-Tool Deep-Dive Blogs:** In-depth posts explaining what each power tool is, why it replaces its proprietary counterpart, and how to get started.
 *   **Instant Search:** Global `Cmd+K` shortcut for lightning-fast discovery.
 *   **Progressive Web App:** Install natively on Android, iOS, or Desktop for offline-ready access.
 *   **Personalization:** Dark/Light mode support, local bookmarks, and custom tool collections.
@@ -76,7 +78,7 @@ Runs on `http://localhost:3001`.
 ## 📦 Project Structure
 
 *   `frontend/src/components`: UI components including the Sidebar, ToolCards, and Iframe panels.
-*   `frontend/src/data`: The core engine containing the 700+ tool definitions and 50+ categories.
+*   `frontend/src/data`: The core engine containing the 700+ tool definitions, 50+ categories, and the per-tool blog content (`tools9.js` + `blogs.js`).
 *   `frontend/src/context`: Global state management for theme, bookmarks, and notifications.
 *   `backend/`: Express API for extended functionality and data synchronization.
 
